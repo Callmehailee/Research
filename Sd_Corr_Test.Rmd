@@ -1,0 +1,40 @@
+---
+title: "SD & Correlation Simulation data test"
+author: "Yumo Peng"
+date: "October 23, 2019"
+output: word_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Try different values for standard deviation and different values for phi
+
+```{r}
+
+sd <- c(2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16,
+        17, 18, 19, 20)
+sd
+
+phi <- c(0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9)
+
+phi
+
+```
+
+Get simulation data based on each of the standard deviation and each of the phi
+
+```{r}
+
+for(val in sd){
+  for(val2 in phi){
+    ar.sim <- arima.sim(model = list(ar = c(val2)), n = 50000, sd = sqrt(val))
+  plot.ts(ar.sim)#plot the simulation data
+  acf(ar.sim) #Get ACF
+  pacf(ar.sim) # Get PACF
+  
+  }
+}
+
+```
